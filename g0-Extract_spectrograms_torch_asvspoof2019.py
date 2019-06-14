@@ -7,9 +7,16 @@ from scipy.signal import spectrogram
 from multiprocessing import Process
 
 def pre_emp(x):
+	'''
+	Apply pre-emphasis to given utterance.
+	x	: list or 1 dimensional numpy.ndarray
+	'''
 	return np.asarray(x[1:] - 0.97 * x[:-1], dtype=np.float32)
 
 def extract_spectrograms(l_utt):
+	'''	
+	Extracts spectrograms
+	'''
 	for line in l_utt:
 		utt, _ = sf.read(line, dtype = 'int16')
 		utt = pre_emp(utt)
@@ -21,8 +28,7 @@ def extract_spectrograms(l_utt):
 			noverlap = _noverlap,
 			nfft = _nfft,
 			mode = _mode)
-		spec = np.expand_dims(spec.T, axis = 0).astype(np.float32)
-		#print(spec.T.shape)# >>> (1025, 3954)
+		spec = np.expand_dims(spec.T, axis = 0).astype(np.float32)		# add 0 dim for torch
 
 		dir_base, fn = os.path.split(line)
 		dir_base, _ = os.path.split(dir_base)
