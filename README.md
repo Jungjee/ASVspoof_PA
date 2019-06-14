@@ -1,1 +1,0 @@
-# ASVspoof2019_PA
