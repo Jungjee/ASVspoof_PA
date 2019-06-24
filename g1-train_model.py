@@ -12,7 +12,7 @@ import torch
 import torch.nn as nn
 from torch.utils import data
 
-from spec_CNN_c_bc import spec_CNN
+from g_spec_CNN_c_bc import spec_CNN
 
 
 def balance_classes(lines_small, lines_big, np_seed):
