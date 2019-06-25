@@ -22,7 +22,7 @@ c_loss_weight: 0.00005
 c_loss_lr: 0.5
 
 #flags
-comet_disable: 0
+comet_disable: 1
 nesterov: 0 #for sgd optim
 amsgrad: 1 #for adam optim
 save_best_only: 0

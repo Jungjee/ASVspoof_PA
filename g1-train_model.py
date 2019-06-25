@@ -112,10 +112,11 @@ if __name__ == '__main__':
 	dir_yaml = os.path.splitext(_abspath)[0] + '.yaml'
 	with open(dir_yaml, 'r') as f_yaml:
 		parser = yaml.load(f_yaml)
-	experiment = Experiment(api_key="9CueLwB3ujfFlhdD9Z2VpKKaq",
-		project_name="torch_spoof19", workspace="jungjee",
-		disabled = bool(parser['comet_disable']))
-	experiment.set_name(parser['name'])
+	if not bool(parser['comet_disable']):
+		experiment = Experiment(api_key="PUT YOUR COMET API KEY",
+			project_name="spoof19", workspace="WORKSPACE",
+			disabled = bool(parser['comet_disable']))
+		experiment.set_name(parser['name'])
 	
 	#device setting
 	cuda = torch.cuda.is_available()
@@ -177,8 +178,9 @@ if __name__ == '__main__':
 	f_params.close()
 
 	#to comet server
-	experiment.log_parameters(parser)
-	experiment.log_parameters(parser['model'])
+	if not bool(parser['comet_disable']):
+		experiment.log_parameters(parser)
+		experiment.log_parameters(parser['model'])
 
 	#define model
 	model = spec_CNN(parser['model'], device).to(device)
@@ -251,7 +253,8 @@ if __name__ == '__main__':
 				model.centers = model.centers - c_deltas
 				pbar.set_description('epoch%d:\tloss_cce:\t%.3f\tloss_c:%.3f'%(epoch, cce_loss, c_loss))
 				pbar.update(1)
-		experiment.log_metric('loss', loss)
+		if not bool(parser['comet_disable']):
+			experiment.log_metric('loss', loss)
 
 		#validate only odd epochs for speed-up.
 		#if epoch % 2 == 1: continue
@@ -277,7 +280,8 @@ if __name__ == '__main__':
 			fpr, tpr, thresholds = roc_curve(y, y_score, pos_label=0)
 			eer = brentq(lambda x: 1. - x - interp1d(fpr, tpr)(x), 0., 1.)
 			print(eer)
-			experiment.log_metric('val_eer', eer)
+			if not bool(parser['comet_disable']):
+				experiment.log_metric('val_eer', eer)
 			f_eer.write('%f \n'%eer)
 	
 			#record best validation model
@@ -285,7 +289,8 @@ if __name__ == '__main__':
 				print('New best EER: %f'%float(eer))
 				best_eer = float(eer)
 				dir_best_model_weights = save_dir + 'models/%d-%.6f.h5'%(epoch, eer)
-				experiment.log_metric('best_val_eer', eer)
+				if not bool(parser['comet_disable']):
+					experiment.log_metric('best_val_eer', eer)
 				
 				#save best model
 				if len(parser['gpu_idx']) > 1: # multi GPUs
