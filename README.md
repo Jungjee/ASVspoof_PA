@@ -12,8 +12,8 @@ Although DNN architecture, and other detailed configurations might slightly diff
 we verified comaparable performance through our internal comparison experiments. 
 (EER of 1.7% was shown in Keras, EER of 1.6 was shown in PyTorch, using only Magnitude spectrogram, on a partial subset of validation set comprising 5,400 bona-fide utt + 5,400 spoofed utts)
 
-Also, for the experiment showing EER of 1.6%, we share a comet_ml experiment, which enables all of you to look the details of conducted experiment! 
-	+ Experiment settings, libraries, and other configurations including the code, yaml configurations are accessible via
+Also, for the experiment showing EER of 1.6%, we share a comet ml experiment, which enables all of you to look the details of conducted experiment! 
+	* Experiment settings, libraries, and other configurations including the code, yaml configurations are accessible via
 	  https://www.comet.ml/jungjee/public-comet-for-fithub/d463da20d0b84c70beeab387c94e8fee
 
 
@@ -27,5 +27,7 @@ To be added continuously..
 * g2	:  Conducts model training and validation (CNN-GRU model, achieves ~ 1.7% EER on validation set)
 	+ Set parameters via yaml file(.yaml)
 
+#3. Acknowledgement.
+* For the Keras-alike model summary, we used the implementation presented in https://github.com/Jungjee/pytorch-summary
 
  
