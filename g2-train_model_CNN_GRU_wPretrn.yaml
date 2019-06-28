@@ -1,0 +1,44 @@
+name: specCNNGRU_wPretrn
+DB: /DB/ASVspoof2019/PA/ASVspoof2019_PA_
+DB_trn: train/spec_magnitude_2048_800_480/
+DB_dev: dev/spec_magnitude_2048_800_480/
+DB_eval: eval/spec_magnitude_2048_800_480/
+dir_meta_trn: cm_protocols/ASVspoof2019.PA.cm.train.trn.txt
+dir_meta_dev: cm_protocols/ASVspoof2019.PA.cm.dev.trl.txt
+dir_meta_eval: cm_protocols/ASVspoof2019.PA.cm.eval.trl.txt
+gpu_idx: [0] #[0, 1]
+nb_proc_db: 4
+save_dir: /exp/model/networks/
+optimizer: Adam #sgd
+lr: 0.0005
+opt_mom: 0.9
+wd: 0.0001
+epoch: 200
+pretrn_epoch: 100
+#epoch: 2
+#pretrn_epoch: 1
+batch_size: 32
+nb_time: 120
+feat_dim: 1025
+lrdec_milestones: [120, 150]
+lrdec: 0.2
+
+#flags
+comet_disable: 1
+do_lr_dec: 0
+nesterov: 0 #for sgd optim
+amsgrad: 1 #for adam optim
+save_best_only: 0
+
+
+#model-related
+model:
+  in_channels: 1
+  filts: [16, [16, 32], [32, 64], [64, 64], [64, 128], [128, 128]]
+  kernels: [[3, 7], [3, 7], [3, 7], [3, 7], [3, 7], [3, 7]]
+  strides: [1, 1, [2, 4], [2, 4], [2, 4], [2, 4]]
+  blocks: [1, 2, 2, 2]
+  nb_fc_node: 64 #4096 #64
+  nb_classes: 2
+  gru_node: 512 #org: 512
+  nb_gru_layer: 1
