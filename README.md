@@ -32,6 +32,6 @@ To be added continuously..
 
 # 3. Acknowledgement.
 
-* For the Keras-alike model summary, we used the implementation presented in https://github.com/Jungjee/pytorch-summary
+* For the Keras-alike model summary, we used the implementation presented in https://github.com/sksq96/pytorch-summary
 
  
