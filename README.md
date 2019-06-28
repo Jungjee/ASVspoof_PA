@@ -1,7 +1,8 @@
 ASVspoof2019 Physical Access
 ============================
 
-#1. Overview
+# 1. Overview
+
 This repository contains modified pytorch codes for the paper 
 Replay attack detection with complementary high-resolution information using end-to-end DNN for the ASVspoof 2019 Challenge.
 (https://arxiv.org/abs/1904.10134, accepted for Interspeech 2019)
@@ -22,14 +23,16 @@ Also, for the experiment showing EER of 1.6%, we share a comet ml experiment, wh
 To be added continuously..
 ***
 
-#2. Script Usage
+# 2. Script Usage
+
 * g0 	:  Extracts spectrograms and align for later usage. 
 * g1	:  Conducts model training and validation (CNN model, achieves ~ 4.2% EER on validation set)
 	+ Set parameters via yaml file(.yaml)
 * g2	:  Conducts model training and validation (CNN-GRU model, achieves ~ 1.7% EER on validation set)
 	+ Set parameters via yaml file(.yaml)
 
-#3. Acknowledgement.
+# 3. Acknowledgement.
+
 * For the Keras-alike model summary, we used the implementation presented in https://github.com/Jungjee/pytorch-summary
 
  
